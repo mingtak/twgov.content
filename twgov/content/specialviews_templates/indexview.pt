@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="twgov.content">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+<tal:note condition="python:False" content="string:設定開始時間startDate，可調整天數" />
+<tal:setStartDate define="startDate python:3">
+
+<!-- 系統最新消息Begin -->
+  <tal:systemNews define="start python:modules['DateTime'].DateTime() - 3;
+                          now python:modules['DateTime'].DateTime();
+                          dateRange python:{'query':(start, now), 'range': 'min:max'};
+                          brain python:context.portal_catalog({'portal_type':'Document', 'created':dateRange},
+                                                              sort_on='created', sort_order='descending')"
+                  condition="brain">
+    <p class="notice info">
+      <a tal:content="python:brain[0].Title" 
+         tal:attributes="title python:brain[0].Description;
+                         href python:brain[0].getURL()"></a>
+    </p>
+    <br/><hr>
+  </tal:systemNews>
+<!-- 系統最新消息End -->
+
+<tal:initialVisit tal:condition="python:request['AUTHENTICATED_USER'].has_role('Anonymous')">
+    <p class="notice info">
+      初次造訪嗎？建議先看看我們的<a title="服務說明" href="/system/service_doc">服務說明！</a>
+    </p>
+    <br/><hr>
+</tal:initialVisit>
+
+<!-- 熱門公告開始 -->
+  <!-- google ad 開始 -->
+<div class="p97 right widget">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- ResponsiveAd -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-9621066722313042"
+       data-ad-slot="6313067471"
+       data-ad-format="auto"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+  <!-- google ad 結束 -->
+
+<div class="p97 right widget">
+  <p></p>
+  <h2 class="sub-heading-upper" style="font-size:1.6em">熱門公告</h2>
+  <tal:hotPoint define="start python:modules['DateTime'].DateTime() - startDate;
+                   now python:modules['DateTime'].DateTime();
+                   dateRange python:{'query':(start, now), 'range': 'min:max'};
+                   brains python:context.portal_catalog({'portal_type':'twgov.content.govnotice', 'created':dateRange},
+                                                         sort_on='hotPoint', sort_order='descending')[:6]"
+           repeat="brain brains">
+
+
+    <div class="p100">
+      <div class="p50">
+        <h5 class="smaller-margin"><span class="square-icons red"><i class="icon-edit"></i></span>
+          <a tal:attributes="href brain/getURL;
+                             title brain/Title"
+             tal:content="python:'%s%s' % (brain.Title.decode('utf-8')[:14], u'...')"> notice title
+          </a>
+        </h5>
+        <p><span tal:content="structure python:'%s%s%s' % (u'<strong>招標單位:</strong>', brain.govDepartment[:14], '...')"> gov department </span><br />
+          <span tal:content="structure string:<strong>預算金額:</strong>${brain/budget}"> notice budget </span><br />
+          <span tal:content="structure python:'%s%s%s' % (u'<strong>招標方式:</strong>', brain.bidWay[:14], '...')"> notice bid way </span><br />
+          <tal:endDate define="endDate python:str(brain.endDate).split()[0]">
+            <span tal:content="structure string:<strong>截標日期:</strong>${endDate}"> notice end date </span>
+          </tal:endDate>
+          <a class="right" href="" tal:attributes="href brain/getURL">詳見...</a>
+        </p>
+      </div>
+    </div>
+  </tal:hotPoint>
+</div>
+<!-- 熱門公告結束 -->
+
+<!-- 觀注公告開始 -->
+
+  <!-- google ad 開始 -->
+<div class="p97 right widget">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="6313067471"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+  <!-- google ad 結束 -->
+
+<div class="p97 right widget">
+  <p></p>
+  <h2 class="sub-heading-upper" style="font-size:1.6em">本日最觀注</h2>
+  <tal:viewPoint define="start python:modules['DateTime'].DateTime() - startDate;
+                   now python:modules['DateTime'].DateTime();
+                   dateRange python:{'query':(start, now), 'range': 'min:max'};
+                   brains python:context.portal_catalog({'portal_type':'twgov.content.govnotice', 'created':dateRange},
+                                                         sort_on='viewPoint', sort_order='descending')[:6]"
+           repeat="brain brains">
+
+
+    <div class="p100">
+      <div class="p50">
+        <h5 class="smaller-margin"><span class="square-icons green"><i class="icon-legal"></i></span>
+          <a tal:attributes="href brain/getURL;
+                             title brain/Title"
+             tal:content="python:'%s%s' % (brain.Title.decode('utf-8')[:14], u'...')"> notice title
+          </a>
+        </h5>
+        <p><span tal:content="structure python:'%s%s%s' % (u'<strong>招標單位:</strong>', brain.govDepartment[:14], '...')"> gov department </span><br />
+          <span tal:content="structure string:<strong>預算金額:</strong>${brain/budget}"> notice budget </span><br />
+          <span tal:content="structure python:'%s%s%s' % (u'<strong>招標方式:</strong>', brain.bidWay[:14], '...')"> notice bid way </span><br />
+          <tal:endDate define="endDate python:str(brain.endDate).split()[0]">
+            <span tal:content="structure string:<strong>截標日期:</strong>${endDate}"> notice end date </span>
+          </tal:endDate>
+          <a class="right" href="" tal:attributes="href brain/getURL">詳見...</a>
+        </p>
+      </div>
+    </div>
+  </tal:viewPoint>
+</div>
+<!-- 觀注公告結束 -->
+
+<!-- 巨額公告開始 -->
+
+  <!-- google ad 開始 -->
+<div class="p97 right widget">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="6313067471"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+  <!-- google ad 結束 -->
+
+<div class="p97 right widget">
+  <p></p>
+  <h2 class="sub-heading-upper" style="font-size:1.6em">本日最巨額</h2>
+  <tal:budgetPoint define="start python:modules['DateTime'].DateTime() - startDate;
+                   now python:modules['DateTime'].DateTime();
+                   dateRange python:{'query':(start, now), 'range': 'min:max'};
+                   brains python:context.portal_catalog({'portal_type':'twgov.content.govnotice', 'created':dateRange},
+                                                         sort_on='budgetPoint', sort_order='descending')[:6]"
+           repeat="brain brains">
+
+
+    <div class="p100">
+      <div class="p50">
+        <h5 class="smaller-margin"><span class="square-icons blue"><i class="icon-globe"></i></span>
+          <a tal:attributes="href brain/getURL;
+                             title brain/Title"
+             tal:content="python:'%s%s' % (brain.Title.decode('utf-8')[:14], u'...')"> notice title
+          </a>
+        </h5>
+        <p><span tal:content="structure python:'%s%s%s' % (u'<strong>招標單位:</strong>', brain.govDepartment[:14], '...')"> gov department </span><br />
+          <span tal:content="structure string:<strong>預算金額:</strong>${brain/budget}"> notice budget </span><br />
+          <span tal:content="structure python:'%s%s%s' % (u'<strong>招標方式:</strong>', brain.bidWay[:14], '...')"> notice bid way </span><br />
+          <tal:endDate define="endDate python:str(brain.endDate).split()[0]">
+            <span tal:content="structure string:<strong>截標日期:</strong>${endDate}"> notice end date </span>
+          </tal:endDate>
+          <a class="right" href="" tal:attributes="href brain/getURL">詳見...</a>
+        </p>
+      </div>
+    </div>
+  </tal:budgetPoint>
+</div>
+<!-- 巨額公告結束 -->
+
+</tal:setStartDate>
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

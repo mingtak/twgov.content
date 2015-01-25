@@ -1,0 +1,275 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="twgov.content">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+<div class="p97 right">
+
+<!-- 系統最新消息Begin -->
+  <tal:systemNews define="start python:modules['DateTime'].DateTime() - 3;
+                          now python:modules['DateTime'].DateTime();
+                          dateRange python:{'query':(start, now), 'range': 'min:max'};
+                          brain python:context.portal_catalog({'portal_type':'Document', 'created':dateRange},
+                                                              sort_on='created', sort_order='descending')"
+                  condition="brain">
+    <p class="notice info">
+      <a tal:content="python:brain[0].Title"
+         tal:attributes="title python:brain[0].Description;
+                         href python:brain[0].getURL()"></a>
+    </p>
+    <hr>
+  </tal:systemNews>
+<!-- 系統最新消息End -->
+
+<tal:script define="script python:'$(document).ready(function(){$(\'#trace_notice\').click(function(){$(\'#trace_notice_text\').load(\'/twGovBidding/trace_notice?id=%s\');;});;});;' % context.id">
+<script type="text/javascript" async="true" defer="true" tal:content="script">
+</script>
+    <tal:checkTraced define="checkTraced context/check_traced">
+      <h2 tal:condition="python:not context.REQUEST.AUTHENTICATED_USER.has_role('Anonymous')"
+          tal:content="structure python:'%s <a id=\'trace_notice\' style=\'font-size:0.5em\'><span id=\'trace_notice_text\'>%s</span></a>' %
+                                             (context.Title(), checkTraced)"></h2>
+      <h2 tal:condition="python:context.REQUEST.AUTHENTICATED_USER.has_role('Anonymous')"
+          tal:content="structure python:'%s <a href=\'/@@facebook-login\' id=\'trace_notice\' style=\'font-size:0.5em\'><span id=\'trace_notice_text\'>%s</span></a>' %
+                                             (context.Title(), checkTraced)"></h2>
+    </tal:checkTraced>
+</tal:script>
+
+
+<!-- google ad begin -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="6313067471"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<hr>
+<!-- google ad end -->
+
+
+    <div class="horizontal-tabs tabs-wrapper p66">
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+<span>&nbsp;</span>
+<a class="button small" tal:attributes="href context/noticeUrl" target=_blank style="font-size:0.75em">領標去</a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-524ee9c36088f37e"></script>
+<br/>
+<!-- AddThis Button END -->
+
+      <ul class="tabs">
+        <li class="active"><a id="tab4" href="#">單位資訊</a></li>
+        <li><a id="tab5" href="#">標案資訊</a></li>
+        <li><a id="tab6" href="#">投標資訊</a></li>
+        <li><a id="tab7" href="#">標案追蹤</a></li>
+      </ul>
+
+      <div class="tab tab4">
+        <p><strong>機關名稱：</strong><span tal:content="context/govDepartment"></span>
+           <i class="icon-star" style="color:#18AA2A" />
+           <span style="font-size:0.8em">
+             <a target="_blank" tal:attributes="href string:/govAnalytics?gov=${context/govDepartment}"> 歷年決標記錄</a>
+           </span>
+        </p>
+        <p><strong>單位名稱：</strong><span tal:content="context/govBranch"></span></p>
+        <p><strong>機關地址：</strong><span tal:content="context/govAddress"></span></p>
+        <p><strong>聯絡人：</strong><span tal:content="context/contact"></span></p> 
+        <p><strong>聯絡電話：</strong><span tal:content="context/telNo"></span></p>
+        <p><strong>傳真號碼：</strong><span tal:content="context/faxNo"></span></p>
+        <p><strong>電子郵件信箱：</strong>
+           <a tal:content="context/emailAddress"
+              tal:attributes="href string:mailto:${context/emailAddress}">
+           </a>
+        </p>
+
+      </div>
+
+      <div class="tab tab5" style="display: none;">
+        <p><strong>公告日期：</strong><span tal:content="python:str(context.startDate).split()[0]"></span></p>
+        <p><strong>標案案號：</strong><span tal:content="context/noticeId"></span></p>
+        <p><strong>標案名稱：</strong><span tal:content="context/noticeName"></span></p>
+        <p><strong>標案預算：</strong><span tal:content="context/budget"></span></p>
+        <p><strong>招標方式：</strong><span tal:content="context/bidWay"></span></p>
+        <p><strong>決標方式：</strong><span tal:content="context/decideWay"></span></p>
+        <p><strong>公告次數：</strong><span tal:content="context/noticeTimes"></span></p>
+        <p><strong>招標狀態：</strong><span tal:content="context/noticeState"></span></p>
+      </div>
+
+      <div class="tab tab6" style="display: none;">
+        <p><strong>截標時間：</strong><span tal:content="context/endDate"></span></p>
+        <p><strong>開標時間：</strong><span tal:content="context/bidDate"></span></p>
+        <p><strong>開標地點：</strong><span tal:content="context/bidAddress"></span></p>
+        <p><strong>押標金：</strong><span tal:content="context/bidDeposit"></span></p>
+        <p><strong>投標地點：</strong><span tal:content="context/documentSendTo"></span></p>
+        <p><strong>廠商資格摘要：</strong><span tal:content="context/companyQualification"></span></p>
+        <p><strong>履約能力要求：</strong><span tal:content="context/companyAbility"></span></p>
+        <p><strong>公告網址：</strong>
+           <a tal:attributes="href context/noticeUrl" target=_blank>前往工程會公告網址</a>
+        </p>
+      </div>
+
+      <div class="tab tab7" style="display: none;">
+
+        <strong></strong>
+
+<tal:back_ref define="back_refs python:view.findBackReferences()">
+	<p><strong>標案動態：</strong>
+           <span tal:condition="python:True if back_refs == [] else False"">尚無動態</span>
+        <tal:hrefs repeat="back_ref back_refs">
+           <br/><a tal:attributes="href back_ref/absolute_url" tal:content="back_ref/Title"></a>
+        </tal:hrefs>
+        </p>
+	<p style="padding-left:5em" tal:condition="python:False">尚無動態2</p>
+</tal:back_ref>
+
+	<div class="p90 left" >
+
+          <p><strong>標案指標：</strong></p>
+          <div class="progress progress-striped active" style="font-size:2em;valign:center">
+            <div class="progress-bar red-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                 tal:attributes="style python:'%s%s%s' % ('width:', context.hotPoint, '%;; font-size:0.62em')">
+              <p class="left" style="padding-left:1em" tal:content="python:'%s%s' % ('熱門指標：', int(context.hotPoint))"> 熱門指標：30</p>
+            </div>
+          </div>
+          <div class="progress progress-striped active" style="font-size:2em;valign:center">
+            <div class="progress-bar green-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                 tal:attributes="style python:'%s%s%s' % ('width:', context.viewPoint, '%;; font-size:0.62em')">
+              <p class="left" style="padding-left:1em" tal:content="python:'%s%s' % ('觀注指標：', int(context.viewPoint))"> 觀注指標：30</p>
+            </div>
+          </div>
+          <div class="progress progress-striped active" style="font-size:2em;valign:center">
+            <div class="progress-bar orange-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                 tal:attributes="style python:'%s%s%s' % ('width:', context.budgetPoint, '%;; font-size:0.62em')">
+              <p class="left" style="padding-left:1em" tal:content="python:'%s%s' % ('巨額指標：', int(context.budgetPoint))"> 巨額指標：30</p>
+            </div>
+          </div>
+          <div class="progress progress-striped active" style="font-size:2em;valign:center">
+            <div class="progress-bar blue-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                 tal:attributes="style python:'%s%s%s' % ('width:', context.importantPoint, '%;; font-size:0.62em')">
+              <p class="left" style="padding-left:1em" tal:content="python:'%s%s' % ('綜合指標：', int(context.importantPoint))"> 綜合指標：30</p>
+            </div>
+          </div>
+<div>
+<p><strong>標籤雲：</strong>
+<tal:getSubject tal:repeat="subject context/Subject">
+<a  class="gery small"
+    tal:attributes="href string:/gov_notice/searchresult_view?key=${subject}" tal:content="subject"/>
+<span tal:condition="not:repeat/subject/end"> / </span>
+</tal:getSubject>
+</p>
+</div>
+
+        </div>
+<!--        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+-->
+      </div>
+
+    </div>
+
+<!-- 興趣列表 -->
+<tal:interest define="catalog python:context.portal_catalog;
+                      subject context/subject;
+                      len python:len(subject);
+                      brain python:catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
+                                           sort_on='created', sort_order='descending')[:10]
+                                   if len < 3 else
+                                   (catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
+                                           sort_on='created', sort_order='descending')[:10] +
+                                    catalog(portal_type='twgov.content.govnotice', Subject=subject[-2].encode('utf8'),
+                                           sort_on='created', sort_order='descending')[:10]);
+                      tempVar python:modules['random'].shuffle(brain);
+                      brain python:list(brain)[:6];">
+<div class="p40 greybox">
+  <h3 class="sub-heading-upper">您可能會有興趣：</h3>
+  <ul class="arrow quote">
+    <li tal:repeat="item brain">
+      <a tal:content="item/Title" tal:attributes="href item/getURL">興趣列表</a>
+    </li>
+<br/>
+  </ul>
+</div>
+</tal:interest>
+
+  <iframe
+    width="100%"
+    height="300"
+    frameborder="0" style="border:0"
+    tal:attributes="src string:https://www.google.com/maps/embed/v1/place?key=AIzaSyAO1XTINa0rK7SGfyAniKnIicBYKz8i1lI&q=${context/govAddress}">
+  </iframe>
+
+<!-- 工商廣告 begin -->
+<hr>
+<tal:bizAd define="catalog python:context.portal_catalog;
+                   brain python:catalog(portal_type='twgov.namecard.namecard');
+                   item python:brain[0].getObject()">
+
+<div class="gallery photoalbums">
+<div class="gallery-row">
+  <dl class="gallery-item col-12 cat-12 cat-12">
+    <dt class="gallery-icon">
+      <a tal:attributes="href item/webSite" target="_blank">
+        <img tal:replace="structure item/@@images/banner/banner" />
+      </a>
+    </dt>
+    <dd class="gallery-caption"><strong tal:content="item/Title">公司名稱</strong></dd>
+    <dd class="gallery-description" tal:content="item/Description">Description</dd>
+  </dl>
+</div>
+</div>
+
+</tal:bizAd>
+
+<hr>
+<!-- 工商廣告 end -->
+
+
+<!-- Disqus Begin -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'govplaygroup'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus End -->
+
+
+
+
+</div>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

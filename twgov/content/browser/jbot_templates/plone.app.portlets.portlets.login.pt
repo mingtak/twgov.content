@@ -1,0 +1,20 @@
+<tal:block condition="view/show"
+           i18n:domain="plone">
+
+<dl class="portlet portletLogin"
+    tal:condition="view/available">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+<br/>
+<div>
+        <a id="login-by-facebook" class="button blue small" href="/@@facebook-login"> <i class="icon-facebook"> </i> 臉書登入</a>
+        <a href="/system/service_doc"><span style="font-size:1.2em; vertical-align:sub">服務說明</span></a>
+</div>
+<p></p>
+        <span class="portletTopRight"></span>
+    </dt>
+
+</dl>
+
+</tal:block>

@@ -1,0 +1,147 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-01-20 02:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: twgov.content\n"
+
+#: ./profiles/default/types/twgov.content.specialviews.xml
+msgid "SpecialViews"
+msgstr ""
+
+#: ./govnotice.py:127
+msgid "bid  deposit"
+msgstr ""
+
+#: ./govnotice.py:132
+msgid "bid document send to"
+msgstr ""
+
+#: ./govnotice.py:87
+msgid "bid way"
+msgstr ""
+
+#: ./govnotice.py:171
+msgid "budget point"
+msgstr ""
+
+#: ./govnotice.py:142
+msgid "company ability to basic qualifications"
+msgstr ""
+
+#: ./govnotice.py:137
+msgid "company qualification"
+msgstr ""
+
+#: ./govnotice.py:67
+msgid "contact email address"
+msgstr ""
+
+#: ./govnotice.py:92
+msgid "decide way"
+msgstr ""
+
+#: ./govnotice.py:62
+msgid "fax number"
+msgstr ""
+
+#: ./profiles/default/types/twgov.content.govnotice.xml
+msgid "govNotice"
+msgstr ""
+
+#: ./profiles/default/types/twgov.content.govnotice.xml
+msgid "govNotice conttent type"
+msgstr ""
+
+#: ./govnotice.py:42
+msgid "governmetn branch unit"
+msgstr ""
+
+#: ./govnotice.py:47
+msgid "governmetn branch unit address"
+msgstr ""
+
+#: ./govnotice.py:37
+msgid "governmetn departments"
+msgstr ""
+
+#: ./govnotice.py:159
+msgid "hot point"
+msgstr ""
+
+#: ./govnotice.py:177
+msgid "important point"
+msgstr ""
+
+#: ./govnotice.py:72
+msgid "notice ID"
+msgstr ""
+
+#: ./govnotice.py:122
+msgid "notice bid address"
+msgstr ""
+
+#: ./govnotice.py:117
+msgid "notice bid date"
+msgstr ""
+
+#: ./govnotice.py:82
+msgid "notice budget"
+msgstr ""
+
+#: ./govnotice.py:112
+msgid "notice end date"
+msgstr ""
+
+#: ./govnotice.py:77
+msgid "notice name"
+msgstr ""
+
+#: ./govnotice.py:107
+msgid "notice start date"
+msgstr ""
+
+#: ./govnotice.py:102
+msgid "notice state"
+msgstr ""
+
+#: ./govnotice.py:147
+msgid "notice url address"
+msgstr ""
+
+#: ./govnotice.py:97
+msgid "number of notice times"
+msgstr ""
+
+#: ./govnotice.py:153
+msgid "organization Code"
+msgstr ""
+
+#: ./profiles/default/types/twgov.content.specialviews.xml
+msgid "special views, include several page views"
+msgstr ""
+
+#: ./govnotice.py:57
+msgid "telephone number"
+msgstr ""
+
+#: ./govnotice.py:52
+msgid "this notice contact"
+msgstr ""
+
+#: ./govnotice.py:165
+msgid "view point"
+msgstr ""
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <bindings>
+  <type type_id="twgov.content.govnotice">
+   <bound-workflow workflow_id="one_state_workflow"/>
+  </type>
+  <type type_id="twgov.content.relationnotice">
+   <bound-workflow workflow_id="one_state_workflow"/>
+  </type>
+  <type type_id="twgov.content.newrelationnotice">
+   <bound-workflow workflow_id="one_state_workflow"/>
+  </type>
+ </bindings>
+</object>

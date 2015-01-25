@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="twgov.content">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+
+<div class="p50">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336X280大矩形 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="9625513874"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<div class="p50 pull-right">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336X280大矩形 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="9625513874"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<hr>
+
+<tal:checkRole condition="python:'Anonymous' in request['AUTHENTICATED_USER'].getRoles()">
+  <tal:getBrain define="catalog python:context.portal_catalog;
+                        brain python:catalog({'portal_type':'twgov.content.newrelationnotice',
+                                              'winningTenderer':modules['Products.CMFPlone.utils'].safe_unicode(request['com'])},
+                                              sort_on='noticeUrl', sort_order='reverse')">
+
+<h3 tal:condition="python:len(brain)==0"
+    tal:content="string:本功能暫無支援您的瀏灠器，請改用Firefox, Chrome, 即可正常顯示。" />
+<tal:checkZero condition="python:len(brain)!=0">
+  <h2 class="sub-heading-upper" style="font-size:1.6em"
+      tal:content="python:'%s 歷年共有 %s 筆得標記錄:' % (request['com'], len(brain))"></h2>
+
+      <ul>
+        <li tal:repeat="item python:brain[:5]">
+           <p>
+             <strong tal:content="string:${item/authorityName}: " />
+             <a tal:content="python:item.Title.split('[決標]:')[1]"
+                tal:attributes="href item/getURL" />
+             <tal:getDate define="dateString python:item.noticeUrl.split('ds=')[1].split('&')[0];
+                                  year python:dateString[0:4];
+                                  month python:dateString[4:6];
+                                  day python:dateString[6:]">
+                 <span tal:content="python:' (公告日期: %s/%s/%s)' % (year, month, day)" />
+             </tal:getDate>
+           </p>
+        </li>
+      </ul>
+</tal:checkZero>
+  </tal:getBrain>
+
+  <p class="pull-right">
+    想查看更多？<a class="button blue small" href="/@@facebook-login"> <i class="icon-facebook"> </i> 臉書登入</a>
+  </p>
+</tal:checkRole>
+
+
+
+<tal:checkRole condition="python:'Anonymous' not in request['AUTHENTICATED_USER'].getRoles()">
+  <tal:getBrain define="catalog python:context.portal_catalog;
+                        start python:int(getattr(request, 'start', 0));
+                        brain python:catalog({'portal_type':'twgov.content.newrelationnotice',
+                                              'winningTenderer':modules['Products.CMFPlone.utils'].safe_unicode(request['com'])},
+                                              sort_on='noticeUrl', sort_order='reverse')">
+
+<h3 tal:condition="python:len(brain)==0"
+    tal:content="string:本功能暫無支援您的瀏灠器，請改用Firefox, Chrome, 即可正常顯示。" />
+<tal:checkZero condition="python:len(brain)!=0">
+
+<h2 class="sub-heading-upper" style="font-size:1.6em"
+    tal:content="python:'%s 歷年共有 %s 筆得標記錄:' % (request['com'], len(brain))"></h2>
+
+    <ul>
+      <tal:repeat repeat="item python:brain[start:start+20]">
+        <li>
+           <p>
+             <strong tal:content="string:${item/authorityName}: " />
+             <a tal:content="python:item.Title.split('[決標]:')[1]"
+                tal:attributes="href item/getURL" />
+             <tal:getDate define="dateString python:item.noticeUrl.split('ds=')[1].split('&')[0];
+                                  year python:dateString[0:4];
+                                  month python:dateString[4:6];
+                                  day python:dateString[6:]">
+                 <span tal:content="python:' (公告日期: %s/%s/%s)' % (year, month, day)" />
+             </tal:getDate>
+           </p>
+        </li>
+
+<tal:check10 condition="python:repeat['item'].number() % 20 == 10">
+<hr>
+<div class="p50">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336X280大矩形 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="9625513874"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<div class="p50 pull-right">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336X280大矩形 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9621066722313042"
+     data-ad-slot="9625513874"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<hr>
+</tal:check10>
+
+
+
+      </tal:repeat>
+    </ul>
+
+<div class="pull-right">
+  <tal:check condition="python:start!=0">
+
+    <a class="button blue small"
+       tal:define="nextStart python:start-20"
+       tal:attributes="href string:./comAnalytics?start=${nextStart}&com=${request/com}">
+       上一頁
+    </a>
+  </tal:check>
+  <tal:check condition="python:start+20 < len(brain)">
+    <a class="button blue small"
+       tal:define="nextStart python:start+20"
+       tal:attributes="href string:./comAnalytics?start=${nextStart}&com=${request/com}">
+       下一頁
+    </a>
+  </tal:check>
+</div>
+</tal:checkZero>
+  </tal:getBrain>
+</tal:checkRole>
+
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

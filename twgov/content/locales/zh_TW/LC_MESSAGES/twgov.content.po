@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-01-20 02:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ./profiles/default/types/twgov.content.specialviews.xml
+msgid "SpecialViews"
+msgstr "特殊頁面顯示"
+
+#: ./govnotice.py:127
+msgid "bid deposit"
+msgstr "押標金"
+
+#: ./govnotice.py:132
+msgid "bid document send to"
+msgstr "投標地點"
+
+#: ./govnotice.py:87
+msgid "bid way"
+msgstr "招標方式"
+
+#: ./govnotice.py:171
+msgid "budget point"
+msgstr "巨額指標"
+
+#: ./govnotice.py:142
+msgid "company ability to basic qualifications"
+msgstr "是否訂有與履約能力有關之基本資格"
+
+#: ./govnotice.py:137
+msgid "company qualification"
+msgstr "廠商資格摘要"
+
+#: ./govnotice.py:67
+msgid "contact email address"
+msgstr "承辦人電子郵件信箱"
+
+#: ./govnotice.py:92
+msgid "decide way"
+msgstr "決標方式"
+
+#: ./govnotice.py:62
+msgid "fax number"
+msgstr "傳真電話"
+
+#: ./profiles/default/types/twgov.content.govnotice.xml
+msgid "govNotice"
+msgstr "政府採購公告"
+
+#: ./profiles/default/types/twgov.content.govnotice.xml
+msgid "govNotice conttent type"
+msgstr "政府採購公告表單"
+
+#: ./govnotice.py:42
+msgid "government branch unit"
+msgstr "單位名稱"
+
+#: ./govnotice.py:47
+msgid "government branch unit address"
+msgstr "單位地址"
+
+#: ./govnotice.py:37
+msgid "government departments"
+msgstr "機關名稱"
+
+#: ./govnotice.py:159
+msgid "hot point"
+msgstr "熱門指標"
+
+#: ./govnotice.py:177
+msgid "important point"
+msgstr "重要指標"
+
+#: ./govnotice.py:72
+msgid "notice ID"
+msgstr "標案案號"
+
+#: ./govnotice.py:122
+msgid "notice bid address"
+msgstr "開標地點"
+
+#: ./govnotice.py:117
+msgid "notice bid date"
+msgstr "開標日期"
+
+#: ./govnotice.py:82
+msgid "notice budget"
+msgstr "採購金額"
+
+#: ./govnotice.py:112
+msgid "notice end date"
+msgstr "截標日期"
+
+#: ./govnotice.py:77
+msgid "notice name"
+msgstr "標案名稱"
+
+#: ./govnotice.py:107
+msgid "notice start date"
+msgstr "公告日期"
+
+#: ./govnotice.py:102
+msgid "notice state"
+msgstr "招標狀態"
+
+#: ./govnotice.py:147
+msgid "notice url address"
+msgstr "公告出處網址"
+
+#: ./govnotice.py:97
+msgid "number of notice times"
+msgstr "新增公告傳輸次數"
+
+#: ./govnotice.py:153
+msgid "organization Code"
+msgstr "機關代碼"
+
+#: ./profiles/default/types/twgov.content.specialviews.xml
+msgid "special views, include several page views"
+msgstr "特殊頁面顯示，包含各個特殊頁面"
+
+#: ./govnotice.py:57
+msgid "telephone number"
+msgstr "電話號碼"
+
+#: ./govnotice.py:52
+msgid "this notice contact"
+msgstr "本案承辦人"
+
+#: ./govnotice.py:165
+msgid "view point"
+msgstr "觀注指標"
+

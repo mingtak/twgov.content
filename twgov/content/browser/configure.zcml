@@ -1,0 +1,120 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="twgov.content">
+
+  <include package="z3c.jbot" file="meta.zcml" />
+    <browser:jbot
+      directory="jbot_templates" />
+
+  <browser:page
+    for="*"
+    name="getgovnotice"
+    permission="cmf.ManagePortal"
+    class=".getgovnotice.GetGovNotice" />
+
+  <browser:page
+    for="*"
+    name="sendgovnotice"
+    permission="cmf.ManagePortal"
+    class=".sendgovnotice.SendGovNotice" />
+
+  <browser:page
+    for="*"
+    name="checkcode"
+    permission="cmf.ManagePortal"
+    class=".checkcode.CheckCode" />
+
+  <browser:page
+    for="*"
+    name="get_relation_notice"
+    permission="cmf.ManagePortal"
+    class=".getRelationNotice.GetRelationNotice" />
+
+  <browser:page
+    for="*"
+    name="trace_notice"
+    permission="zope2.View"
+    class=".tracenotice.TraceNotice" />
+
+  <browser:page
+    for="*"
+    name="check_traced"
+    permission="zope2.View"
+    class=".tracenotice.CheckTraced" />
+
+  <browser:page
+    for="*"
+    name="send_relation_item"
+    permission="cmf.ManagePortal"
+    class=".sendrelationitem.SendRelationItem" />
+
+  <browser:page
+    for="*"
+    name="sitemap_govnotice"
+    permission="zope2.View"
+    class=".sitemap.SitemapGovNotice" />
+
+  <browser:page
+    for="*"
+    name="sitemap_relatednotice"
+    permission="zope2.View"
+    class=".sitemap.SitemapRelatedNotice" />
+
+  <browser:page
+    for="*"
+    name="sitemap_news"
+    permission="zope2.View"
+    class=".sitemap.SitemapDocAndNews" />
+
+
+
+
+  <browser:page
+    for="*"
+    name="userkeywordlist"
+    permission="cmf.ManagePortal"
+    class=".userkeywordlist.UserKeywordList" />
+
+  <browser:page
+    for="*"
+    name="getNewRelationNotice"
+    permission="cmf.ManagePortal"
+    class=".getNewRelationNotice.GetNewRelationNotice" />
+
+  <browser:page
+    for="*"
+    name="getHistoryNewRelationNotice"
+    permission="cmf.ManagePortal"
+    class=".getHistoryNewRelationNotice.GetHistoryNewRelationNotice" />
+
+  <browser:page
+    for="*"
+    name="comAnalytics"
+    permission="zope2.View"
+    class=".noticeanalytics.ComAnalytics" />
+
+  <browser:page
+    for="*"
+    name="govAnalytics"
+    permission="zope2.View"
+    class=".noticeanalytics.GovAnalytics" />
+
+  <browser:page
+    for="*"
+    name="getBiddingCompaniesName"
+    permission="cmf.ManagePortal"
+    class=".getBiddingCompaniesName.GetBiddingCompaniesName" />
+
+
+<!--
+測試用，平常不開 -->
+  <browser:page
+    for="*"
+    name="testFunction"
+    permission="cmf.ManagePortal"
+    class=".testfunction.TestFunction" />
+
+
+</configure>

@@ -1,0 +1,42 @@
+<h1>會員列表</h1>
+
+<a href="/" target="_blank">回網站首頁</a>
+
+<tal:users define="users view/users;
+                   amount python:len(users)">
+<h3 tal:content="string:目前會員總數：${amount}"></h3>
+
+</tal:users>
+<!--
+<table border=1>
+  <thead>
+    <tr>
+      <td>序號</td>
+      <td>ID</td>
+      <td>FullName</td>
+      <td>是否要收公告</td>
+      <td>email設定</td>
+      <td>關鍵字設定</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tal:users define="users view/users">
+      <tr tal:repeat="user users">
+        <td tal:content="repeat/user/number"></td>
+        <td tal:content="user/id"></td>
+        <td tal:content="python:user.getProperty('fullname')"></td>
+        <td tal:content="user/checkedregister"></td>
+        <td tal:content="user/emailaddress"></td>
+        <td tal:content="python:getattr(user, 'keywords', '')"></td>
+      </tr>
+    </tal:users>
+
+  </tbody>
+</table>
+-->
+
+<br/>
+<a href="/" target="_blank">回網站首頁</a>
+<br/><br/><br/><br/><br/>
+<!--  <div tal:content="python:dir(users[0])"></div>
+-->

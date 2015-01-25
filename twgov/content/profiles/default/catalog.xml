@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<object name="portal_catalog">
+    <index name="noticeUrl" meta_type="FieldIndex">
+        <indexed_attr value="noticeUrl"/>
+    </index>
+    <column value="noticeUrl"/>
+
+    <index name="noticeId" meta_type="FieldIndex">
+        <indexed_attr value="noticeId"/>
+    </index>
+    <column value="noticeId"/>
+
+    <index name="noticeName" meta_type="FieldIndex">
+        <indexed_attr value="noticeName"/>
+    </index>
+    <column value="noticeName"/>
+
+    <index name="govDepartment" meta_type="FieldIndex">
+        <indexed_attr value="govDepartment"/>
+    </index>
+    <column value="govDepartment"/>
+
+    <index name="budget" meta_type="FieldIndex">
+        <indexed_attr value="budget"/>
+    </index>
+    <column value="budget"/>
+
+    <index name="bidWay" meta_type="FieldIndex">
+        <indexed_attr value="bidWay"/>
+    </index>
+    <column value="bidWay"/>
+
+    <index name="endDate" meta_type="FieldIndex">
+        <indexed_attr value="endDate"/>
+    </index>
+    <column value="endDate"/>
+
+    <index name="hotPoint" meta_type="FieldIndex">
+        <indexed_attr value="hotPoint"/>
+    </index>
+    <column value="hotPoint"/>
+
+    <index name="viewPoint" meta_type="FieldIndex">
+        <indexed_attr value="viewPoint"/>
+    </index>
+    <column value="viewPoint"/>
+
+    <index name="budgetPoint" meta_type="FieldIndex">
+        <indexed_attr value="budgetPoint"/>
+    </index>
+    <column value="budgetPoint"/>
+
+    <index name="noticePublishedDate" meta_type="FieldIndex">
+        <indexed_attr value="noticePublishedDate"/>
+    </index>
+    <column value="noticePublishedDate"/>
+
+    <index name="authorityName" meta_type="FieldIndex">
+        <indexed_attr value="authorityName"/>
+    </index>
+    <column value="authorityName"/>
+
+    <index name="winningTenderer" meta_type="FieldIndex">
+        <indexed_attr value="winningTenderer"/>
+    </index>
+    <column value="winningTenderer"/>
+
+    <index name="noAwardCompaniesName" meta_type="FieldIndex">
+        <indexed_attr value="noAwardCompaniesName"/>
+    </index>
+    <index name="searchableNoAwardCompaniesName" meta_type="ZCTextIndex">
+        <indexed_attr value="noAwardCompaniesName"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
+    <column value="noAwardCompaniesName"/>
+
+    <index name="biddingCompaniesName" meta_type="ZCTextIndex">
+        <indexed_attr value="biddingCompaniesName"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
+    <column value="biddingCompaniesName"/>
+
+</object>

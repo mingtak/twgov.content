@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="twgov.content">
+<body>
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+
+<tal:membership define="membership context/portal_membership;
+                        member membership/getAuthenticatedMember;">
+
+<tal:isAnonymous condition="python:True if str(member) == 'Anonymous User' else False">
+  <span tal:condition="python:False" tal:content="string:測試匿名，轉向login" />
+  <script>document.location.href="/";</script>
+</tal:isAnonymous>
+
+<span tal:condition="python:False" tal:content="string:form 開始" />
+
+<div class="p66">
+
+<form name="edit_form" method="post" class="fgBaseEditForm " id="fg-base-edit" action="" tal:attributes="action request/URL">
+<br />
+<label class="formQuestion" for="replyto">
+我要收到每日公告
+<tal:hasCheckedAttr condition="python:hasattr(member,'checkedregister')">
+  <input type="checkbox" name="checkedregister" value="True" checked tal:condition="python:True if member.checkedregister == True else False" />
+  <input type="checkbox" name="checkedregister" value="False" tal:condition="python:True if member.checkedregister == False else False" />
+</tal:hasCheckedAttr>
+
+<tal:noCheckedAttr condition="python:not hasattr(member,'checkedregister')">
+  <input type="checkbox" name="checkedregister" value="True" checked/>
+</tal:noCheckedAttr>
+
+</label>
+
+<label class="formQuestion" for="replyto">
+您的電子郵件信箱：
+</label>
+<input type="text" name="replyto" class="blurrable firstToFocus" id="replyto"
+       size="30" maxlength="255" value="" tal:attributes="value member/emailaddress|nothing" />
+<br /><br />
+<fieldset class="PFGFieldsetWidget" id="pfg-fieldsetname-keywords">
+<legend for="pfg-fieldsetname-keywords">
+追蹤關鍵字(一行一組關鍵字)：
+</legend>
+<textarea id="keywords" name="keywords" tal:content="member/keywords|nothing"></textarea>
+
+</fieldset>
+
+
+<div class="formControls">
+<br />
+<input class="context" type="submit" name="form_submit" value="送出" />
+</div>
+</form>
+
+</div>
+<span tal:condition="python:False" tal:content="string:form 結束" />
+</tal:membership>
+
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>

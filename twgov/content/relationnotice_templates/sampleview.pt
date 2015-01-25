@@ -1,0 +1,138 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="twgov.content">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+
+
+<h2 class="heading" tal:content="context/title"></h2>
+
+
+<!-- Google AD Begin -->
+<p></p>
+  <tal:isPc condition="python:False if 'iPad' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'Android' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'iPhone' in context.REQUEST['HTTP_USER_AGENT'] else True">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 728_90超級橫幅 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-9621066722313042"
+         data-ad-slot="5112885076"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </tal:isPc>
+
+  <tal:isMobile condition="python:True if 'iPad' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'Android' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'iPhone' in context.REQUEST['HTTP_USER_AGENT'] else False">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 336X280大矩形 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:336px;height:280px"
+         data-ad-client="ca-pub-9621066722313042"
+         data-ad-slot="9625513874"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </tal:isMobile>
+<!-- Google AD End -->
+
+
+<!--<p><strong>相關公告：</strong></p>-->
+<tal:relation repeat="relationItem context/noticeRelation">
+<p><strong>原招標公告內容：</strong><a tal:attributes="href relationItem/to_object/absolute_url"
+                                 tal:content="relationItem/to_object/Title">原始公告網址</a></p>
+</tal:relation>
+
+<div class="p100">
+  <tal:contents content="structure context/noticeDetail/raw">
+  </tal:contents>
+<p><strong>公告網址：</strong><a tal:attributes="href context/noticeUrl" target="_blank">前往工程會公告網址</a></p>
+
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-524ee9c36088f37e"></script>
+<!-- AddThis Button END -->
+
+<!-- Google AD Begin -->
+<p></p>
+  <tal:isPc condition="python:False if 'iPad' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'Android' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'iPhone' in context.REQUEST['HTTP_USER_AGENT'] else True">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 728_90超級橫幅 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-9621066722313042"
+         data-ad-slot="5112885076"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </tal:isPc>
+
+  <tal:isMobile condition="python:True if 'iPad' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'Android' in context.REQUEST['HTTP_USER_AGENT'] or
+                                         'iPhone' in context.REQUEST['HTTP_USER_AGENT'] else False">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 336X280大矩形 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:336px;height:280px"
+         data-ad-client="ca-pub-9621066722313042"
+         data-ad-slot="9625513874"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </tal:isMobile>
+<!-- Google AD End -->
+
+<!-- Disqus Begin -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'govplaygroup'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus End -->
+
+
+
+
+
+
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

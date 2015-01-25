@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portal_memberdata" meta_type="Plone Memberdata Tool">
+  <property name="checkedregister" type="boolean">True</property>
+  <property name="emailaddress" type="string"></property>
+  <property name="keyword1" type="string"></property>
+  <property name="keyword2" type="string"></property>
+  <property name="keyword3" type="string"></property>
+  <property name="keyword4" type="string"></property>
+  <property name="keyword5" type="string"></property>
+  <property name="keyword5" type="string"></property>
+  <property name="keywords" type="string"></property>
+</object>
