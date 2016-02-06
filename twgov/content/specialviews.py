@@ -16,6 +16,8 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
 
+from plone.memoize import ram
+from time import time
 
 from twgov.content import MessageFactory as _
 
@@ -35,26 +37,9 @@ class ISpecialViews(form.Schema, IImageScaleTraversable):
     form.model("models/specialviews.xml")
 
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
 class SpecialViews(Container):
     grok.implements(ISpecialViews)
 
-    # Add your class methods and properties here
-
-
-# View class
-# The view will automatically use a similarly named template in
-# specialviews_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
 
 class IndexView(grok.View):
     """ sample view class """
@@ -70,6 +55,14 @@ class GovNoticeView(grok.View):
     grok.context(ISpecialViews)
     grok.require('zope2.View')
     grok.name('govnoticeview')
+
+    @ram.cache(lambda *args: time() // (60 * 60 * 12))
+    def getNoticeList(self):
+        context = self.context
+        catalog = context.portal_catalog;
+        results = catalog(portal_type='twgov.content.govnotice', sort_on='created', sort_order='descending')[:5000]
+        return results
+
 
 class NewsView(grok.View):
     """ sample view class """

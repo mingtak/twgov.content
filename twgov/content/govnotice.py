@@ -17,7 +17,7 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from z3c.relationfield.schema import RelationList, RelationChoice
 from plone.formwidget.contenttree import ObjPathSourceBinder
-
+import random
 
 from twgov.content import MessageFactory as _
 
@@ -211,7 +211,6 @@ class govNotice(Container):
 
     # Add your class methods and properties here
 
-
 class SampleView(grok.View):
     grok.context(IgovNotice)
     grok.require('zope2.View')
@@ -233,6 +232,21 @@ class SampleView(grok.View):
         logger = logging.getLogger("findBackReferences")
         backReferences = back_references(self.context, 'noticeRelation')
         return backReferences
+
+    def findSimilarNotice(self):
+        context = self.context
+        catalog = context.portal_catalog
+        subject = context.subject
+        subjectCount = len(subject)
+        brain = catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
+                        sort_on='created', sort_order='descending')[:10] \
+                if subjectCount < 3 else \
+                (catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
+                         sort_on='created', sort_order='descending')[:10] + \
+                 catalog(portal_type='twgov.content.govnotice', Subject=subject[-2].encode('utf8'),
+                         sort_on='created', sort_order='descending')[:10]);
+        random.shuffle(brain)
+        return brain
 
 
 @indexer(IgovNotice)
@@ -284,9 +298,3 @@ grok.global_adapter(viewPoint_indexer, name='viewPoint')
 def budgetPoint_indexer(obj):
      return obj.budgetPoint
 grok.global_adapter(budgetPoint_indexer, name='budgetPoint')
-
-
-
-
-
-

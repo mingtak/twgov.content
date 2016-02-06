@@ -4,6 +4,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import logging
 from plone import api
 
+from plone.memoize import ram
+from time import time
+
 
 logger = logging.getLogger("userkeywordlist.py")
 
@@ -12,6 +15,8 @@ class UserKeywordList(BrowserView):
 
     template = ViewPageTemplateFile('templates/userkeywordlist.pt')
 
+
+    @ram.cache(lambda *args: time() // (60 * 60 * 12))
     def __call__(self):
         catalog = api.portal.get_tool(name='portal_catalog')
         #取得plone預設的帳號型態

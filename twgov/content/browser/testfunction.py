@@ -12,6 +12,18 @@ logger = logging.getLogger("TESTFUNCTION")
 #write log data to log file
 class TestFunction(BrowserView):
     def __call__(self):
+        import pdb; pdb.set_trace()
+        return
+
+
+        #cs.auth.facebook產生的id，單獨存在acl_users.cs-facebook-users中，使用portal_membership找不出來
+        #使用以下三行撈出facebook型態帳號
+#        acl_users = api.portal.get_tool(name='acl_users')
+#        cs_facebook_users = getattr(acl_users, 'cs-facebook-users', '')
+#        facebookUsers = cs_facebook_users.enumerateUsers()
+
+# 用這行找到user object ==>   user = api.user.get(userid=userId)
+
         catalog = self.context.portal_catalog
         brain = catalog({'portal_type':['twgov.content.newrelationnotice']}, sort_on='id')
 #        import pdb; pdb.set_trace()

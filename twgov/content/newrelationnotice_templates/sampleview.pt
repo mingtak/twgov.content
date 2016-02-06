@@ -112,10 +112,13 @@
 
       <div class="tab tab2" style="display: none;">
         <p><strong> 得標廠商名稱：</strong>
-           <span tal:content="context/winningTenderer" /> <i class="icon-star" style="color:#18AA2A" />
+           <span tal:content="python:'' if len(context.winningTenderer) == 0 else '%s**%s' % (context.winningTenderer[0], context.winningTenderer[2:])" />
+<tal:ignore condition="python:False">
+           <i class="icon-star" style="color:#18AA2A" />
            <span style="font-size:0.8em">
              <a tal:attributes="href string:/comAnalytics?com=${context/winningTenderer}"> 投標記錄</a>
            </span>
+</tal:ignore>
         </p>
         <p><strong> 預算金額：</strong><span tal:content="context/noticeBudget"></span></p>
         <p><strong> 決標金額：</strong><span tal:content="context/awardAmount"></span></p>
@@ -123,10 +126,13 @@
         <p><strong> 投標廠商家數：</strong><span tal:content="context/tenderCompanies"></span></p>
         <tal:repeat repeat="item python:context.noAwardCompaniesName.split(',')">
           <p><strong> 未得標廠商名稱：</strong>
-             <span tal:content="item" /> <i class="icon-star" style="color:#18AA2A" />
+             <span tal:content="python:'' if len(item) == 0 else '%s**%s' % (item[0], item[2:])" />
+<tal:ignore condition="python:False">
+             <i class="icon-star" style="color:#18AA2A" />
              <span style="font-size:0.8em">
                <a tal:attributes="href string:/comAnalytics?com=${item}"> 投標記錄</a>
              </span>
+</tal:ignore>
           </p>
         </tal:repeat>
       </div>

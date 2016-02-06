@@ -21,6 +21,15 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 
+GET_HEADERS = {
+    "Accept-Language": "en-US,en;q=0.5",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Referer": "http://web.pcc.gov.tw",
+    "Connection": "keep-alive"
+}
+
+
 class GetNewRelationNotice(BrowserView):
     def __call__(self):
         logger = logging.getLogger("getNewRelationNotice.GetNewRelationNotice")
@@ -55,8 +64,18 @@ class GetNewRelationNotice(BrowserView):
                 os.system('sleep 1s')
                 if len(catalog(noticeUrl=pageUrl)) > 0:
                     logger.info('noticeUrl: %s' % pageUrl)
-                    continue                
-                pageHtml =  urllib2.urlopen(pageUrl).read()
+                    continue
+
+                try:
+                    request = urllib2.Request(pageUrl, headers=GET_HEADERS)        
+                    pageHtml =  urllib2.urlopen(request).read()
+                except:
+                    api.portal.send_email(recipient=LOG_MAIL_RECIPIENT,
+                        sender=LOG_MAIL_SENDER,
+                        subject="Play公社getNewRelationNotice錯誤回報",
+                        body="網站無回應或被擋了",)
+                    raise IOError('web site NO Response')
+
                 logger.info('date: %s, count: %s, len: %s' % (dateString, addCount, len(pageHtml)))
                 soup = BeautifulSoup(pageHtml)
                 find_All_T11b = soup.find_all('td', attrs={'class':'T11b', 'align':'left'})

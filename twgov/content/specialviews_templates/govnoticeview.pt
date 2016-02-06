@@ -33,23 +33,20 @@
 <p></p>
     <h2 class="sub-heading-upper" style="font-size:1.6em">政府採購公告列表</h2>
 
-
-  <div tal:define="catalog python:here.portal_catalog;
-                   results python:catalog(portal_type='twgov.content.govnotice', sort_on='created', sort_order='descending')[:5000];
+  <div tal:define="results python:view.getNoticeList();
                    start request/start|python:0;
                    batch python:modules['ZTUtils'].Batch(results, 
-                                                          size=20, 
-                                                          start=start);
-                    previous python:batch.previous;
-                    next python:batch.next">
-
+                                                         size=20, 
+                                                         start=start);
+                   previous python:batch.previous;
+                   next python:batch.next;">
 
 <ul>
   <tal:item repeat="result batch">
     <tal:date define="date result/CreationDate">
          <li><strong tal:content="string:${result/govDepartment}："></strong>
              <a tal:content="result/Title"
-                tal:attributes="href result/getURL;
+                tal:attributes="href python:result.getURL().replace('twGovBidding/', '');
                                 title result/Description">govDepartment goes here</a>
              <span tal:content="python:'(%s)' % (str(date).split('T')[0])"></span>
          </li>

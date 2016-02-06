@@ -30,6 +30,14 @@ load_userdict(MY_DICT)
 
 import re
 
+GET_HEADERS = {
+    "Accept-Language": "en-US,en;q=0.5",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Referer": "http://web.pcc.gov.tw",
+    "Connection": "keep-alive"
+}
+
 
 class GetGovNotice(BrowserView):
     def __call__(self):
@@ -38,8 +46,14 @@ class GetGovNotice(BrowserView):
         segLogger = logging.getLogger("分詞結果")
         #取得公告首頁
         try:
-            getHtml = urllib2.urlopen(GOV_NOTICE_URL)
+            request = urllib2.Request(GOV_NOTICE_URL, headers=GET_HEADERS)
+            getHtml = urllib2.urlopen(request)
+#            getHtml = urllib2.urlopen(GOV_NOTICE_URL)
         except:
+            api.portal.send_email(recipient=LOG_MAIL_RECIPIENT,
+                sender=LOG_MAIL_SENDER,
+                subject="Play公社錯誤回報",
+                body="網站無回應或被擋了",)
             raise IOError('web site NO Response')
         hrefList = list()
         for line in getHtml:
@@ -58,8 +72,14 @@ class GetGovNotice(BrowserView):
                 continue
 
             try:
-                getNoticeHtml = urllib2.urlopen(link)
+                request = urllib2.Request(link, headers=GET_HEADERS)
+                getNoticeHtml = urllib2.urlopen(request)
+#                getNoticeHtml = urllib2.urlopen(link)
             except:
+                api.portal.send_email(recipient=LOG_MAIL_RECIPIENT,
+                    sender=LOG_MAIL_SENDER,
+                    subject="Play公社錯誤回報",
+                    body="公告頁面無回應或被擋了: %s" % link,)
                 continue
             doc = getNoticeHtml.read()
             soup = BeautifulSoup(doc.decode('utf-8'))

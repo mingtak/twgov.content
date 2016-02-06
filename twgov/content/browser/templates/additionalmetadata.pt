@@ -1,0 +1,14 @@
+<meta property="og:title" tal:attributes="content context/Title"/> 
+<meta property="og:type" content="政府採購資訊"/> 
+<meta property="og:url" tal:attributes="content context/absolute_url"/>
+
+
+<tal:image define="context python:view.context;
+                   catalog python:context.portal_catalog;
+                   brain python:catalog({'Type':'Image', 'path':'twGovBidding/system/social_images'});
+                   imageUrl python:modules['random'].choice(brain).getURL() if brain else ''">
+    <meta property="og:image" tal:attributes="content string:${imageUrl}/@@images/image/preview"/> 
+</tal:image
+
+<meta property="og:site_name" content="政府採購報馬仔"/> 
+<meta property="og:description" tal:attributes="content context/description"/>

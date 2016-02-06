@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+#from plone.memoize import ram
+#from time import time
 
 
 class SitemapRelatedNotice(BrowserView):
 
     template = ViewPageTemplateFile('templates/sitemap.pt')
 
+#    @ram.cache(lambda *args: time() // (60 * 60 * 12))
     def __call__(self):
         request = self.request
         catalog = self.context.portal_catalog
@@ -21,6 +24,7 @@ class SitemapGovNotice(BrowserView):
 
     template = ViewPageTemplateFile('templates/sitemap.pt')
 
+#    @ram.cache(lambda *args: time() // (60 * 60 * 12))
     def __call__(self):
         request = self.request
         catalog = self.context.portal_catalog
@@ -35,6 +39,7 @@ class SitemapDocAndNews(BrowserView):
 
     template = ViewPageTemplateFile('templates/sitemap.pt')
 
+#    @ram.cache(lambda *args: time() // (60 * 60 * 12))
     def __call__(self):
         request = self.request
         catalog = self.context.portal_catalog

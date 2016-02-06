@@ -110,7 +110,13 @@
         <p><strong>公告日期：</strong><span tal:content="python:str(context.startDate).split()[0]"></span></p>
         <p><strong>標案案號：</strong><span tal:content="context/noticeId"></span></p>
         <p><strong>標案名稱：</strong><span tal:content="context/noticeName"></span></p>
-        <p><strong>標案預算：</strong><span tal:content="context/budget"></span></p>
+        <p><strong>標案預算：</strong>
+             <span tal:content="string:${context/budget}" />
+             <span>(僅供參考，正確預算請見</span>
+             <a target="_blank" tal:attributes="href context/noticeUrl">官方公告</a>
+             <span>)</span>
+
+        </p>
         <p><strong>招標方式：</strong><span tal:content="context/bidWay"></span></p>
         <p><strong>決標方式：</strong><span tal:content="context/decideWay"></span></p>
         <p><strong>公告次數：</strong><span tal:content="context/noticeTimes"></span></p>
@@ -189,18 +195,8 @@
     </div>
 
 <!-- 興趣列表 -->
-<tal:interest define="catalog python:context.portal_catalog;
-                      subject context/subject;
-                      len python:len(subject);
-                      brain python:catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
-                                           sort_on='created', sort_order='descending')[:10]
-                                   if len < 3 else
-                                   (catalog(portal_type='twgov.content.govnotice', Subject=subject[-1].encode('utf8'),
-                                           sort_on='created', sort_order='descending')[:10] +
-                                    catalog(portal_type='twgov.content.govnotice', Subject=subject[-2].encode('utf8'),
-                                           sort_on='created', sort_order='descending')[:10]);
-                      tempVar python:modules['random'].shuffle(brain);
-                      brain python:list(brain)[:6];">
+
+<tal:interest define="brain python:view.findSimilarNotice()[:6]">
 <div class="p40 greybox">
   <h3 class="sub-heading-upper">您可能會有興趣：</h3>
   <ul class="arrow quote">
@@ -223,18 +219,21 @@
 <hr>
 <tal:bizAd define="catalog python:context.portal_catalog;
                    brain python:catalog(portal_type='twgov.namecard.namecard');
-                   item python:brain[0].getObject()">
+                   brainItem python:brain[0]">
 
 <div class="gallery photoalbums">
 <div class="gallery-row">
   <dl class="gallery-item col-12 cat-12 cat-12">
     <dt class="gallery-icon">
-      <a tal:attributes="href item/webSite" target="_blank">
-        <img tal:replace="structure item/@@images/banner/banner" />
+      <a tal:attributes="href brainItem/webSite" target="_blank">
+        <img tal:attributes="src string:${brainItem/getURL}/@@images/banner/banner;
+                             alt brainItem/Title;
+                             title brainItem/Title" />
+
       </a>
     </dt>
-    <dd class="gallery-caption"><strong tal:content="item/Title">公司名稱</strong></dd>
-    <dd class="gallery-description" tal:content="item/Description">Description</dd>
+    <dd class="gallery-caption"><strong tal:content="brainItem/Title">公司名稱</strong></dd>
+    <dd class="gallery-description" tal:content="brainItem/Description">Description</dd>
   </dl>
 </div>
 </div>
