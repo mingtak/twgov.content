@@ -14,6 +14,7 @@ from ..config import MY_DICT
 from ..config import METADATA_KEYWORD_LIST
 from plone import api
 from random import random, choice, randrange
+import time
 from datetime import datetime
 from mmseg import seg_txt
 from Products.CMFPlone.utils import safe_unicode
@@ -39,15 +40,23 @@ GET_HEADERS = {
 }
 
 
+from ..config import tmp_url
+
 class GetGovNotice(BrowserView):
     def __call__(self):
+
+        proxy = urllib2.ProxyHandler({'http': 'proxy.hinet.net'})
+        opener = urllib2.build_opener(proxy)
+        urllib2.install_opener(opener)
         logger = logging.getLogger(".getgovnotice.GetGovNotice")
         titleLogger = logging.getLogger("分詞案名")
         segLogger = logging.getLogger("分詞結果")
         #取得公告首頁
         try:
             request = urllib2.Request(GOV_NOTICE_URL, headers=GET_HEADERS)
+#            request = urllib2.Request(tmp_url, headers=GET_HEADERS)
             getHtml = urllib2.urlopen(request)
+#            import pdb; pdb.set_trace()
 #            getHtml = urllib2.urlopen(GOV_NOTICE_URL)
         except:
             api.portal.send_email(recipient=LOG_MAIL_RECIPIENT,
@@ -75,6 +84,7 @@ class GetGovNotice(BrowserView):
                 request = urllib2.Request(link, headers=GET_HEADERS)
                 getNoticeHtml = urllib2.urlopen(request)
 #                getNoticeHtml = urllib2.urlopen(link)
+                time.sleep(1)
             except:
                 api.portal.send_email(recipient=LOG_MAIL_RECIPIENT,
                     sender=LOG_MAIL_SENDER,

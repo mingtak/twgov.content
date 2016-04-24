@@ -12,7 +12,7 @@
   <thead>
     <tr>
       <td>序號</td>
-      <td>ID</td>
+      <td>ID/FBaddr</td>
       <td>FullName</td>
       <td>是否要收公告</td>
       <td>email設定</td>
@@ -23,7 +23,9 @@
     <tal:users define="users view/users">
       <tr tal:repeat="user users">
         <td tal:content="repeat/user/number"></td>
-        <td tal:content="user/id"></td>
+        <td>
+          <a target="_blank" tal:attributes="href python:'http://www.facebook.com/%s' % user.id" tal:content="user/id"></a>
+        </td>
         <td tal:content="python:user.getProperty('fullname')"></td>
         <td tal:content="user/checkedregister"></td>
         <td tal:content="user/emailaddress"></td>

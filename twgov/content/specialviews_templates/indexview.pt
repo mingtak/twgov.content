@@ -16,7 +16,7 @@
   <metal:content-core define-macro="content-core">
 
 <tal:note condition="python:False" content="string:設定開始時間startDate，可調整天數" />
-<tal:setStartDate define="startDate python:13">
+<tal:setStartDate define="startDate python:3">
 
 <!-- 系統最新消息Begin -->
   <tal:systemNews define="start python:modules['DateTime'].DateTime() - 3;

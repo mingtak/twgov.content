@@ -7,11 +7,6 @@
       i18n:domain="twgov.content">
 <body>
 
-<tal:comment tal:condition="nothing">
-    This is a sample view template. It will not be used for rendering the
-    content unless activated by creation of a view class with a matching name.
-</tal:comment>
-
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
@@ -79,14 +74,15 @@
 <br/>
 <!-- AddThis Button END -->
 
-      <ul class="tabs">
+
+      <ul class="tabs" tal:condition="python:'facebook.com' not in getattr(context.REQUEST, 'HTTP_REFERER', '')">
         <li class="active"><a id="tab4" href="#">單位資訊</a></li>
         <li><a id="tab5" href="#">標案資訊</a></li>
         <li><a id="tab6" href="#">投標資訊</a></li>
         <li><a id="tab7" href="#">標案追蹤</a></li>
       </ul>
 
-      <div class="tab tab4">
+      <div class="tab tab4" tal:condition="python:'facebook.com' not in getattr(context.REQUEST, 'HTTP_REFERER', '')">
         <p><strong>機關名稱：</strong><span tal:content="context/govDepartment"></span>
            <i class="icon-star" style="color:#18AA2A" />
            <span style="font-size:0.8em">
@@ -106,7 +102,7 @@
 
       </div>
 
-      <div class="tab tab5" style="display: none;">
+      <div class="tab tab5" style="display: none;" tal:condition="python:'facebook.com' not in getattr(context.REQUEST, 'HTTP_REFERER', '')">
         <p><strong>公告日期：</strong><span tal:content="python:str(context.startDate).split()[0]"></span></p>
         <p><strong>標案案號：</strong><span tal:content="context/noticeId"></span></p>
         <p><strong>標案名稱：</strong><span tal:content="context/noticeName"></span></p>
@@ -123,7 +119,7 @@
         <p><strong>招標狀態：</strong><span tal:content="context/noticeState"></span></p>
       </div>
 
-      <div class="tab tab6" style="display: none;">
+      <div class="tab tab6" style="display: none;" tal:condition="python:'facebook.com' not in getattr(context.REQUEST, 'HTTP_REFERER', '')">
         <p><strong>截標時間：</strong><span tal:content="context/endDate"></span></p>
         <p><strong>開標時間：</strong><span tal:content="context/bidDate"></span></p>
         <p><strong>開標地點：</strong><span tal:content="context/bidAddress"></span></p>
@@ -136,7 +132,7 @@
         </p>
       </div>
 
-      <div class="tab tab7" style="display: none;">
+      <div class="tab tab7" style="display: none;" tal:condition="python:'facebook.com' not in getattr(context.REQUEST, 'HTTP_REFERER', '')">
 
         <strong></strong>
 
@@ -192,7 +188,58 @@
 -->
       </div>
 
+
+<div tal:condition="python:'facebook.com' in getattr(context.REQUEST, 'HTTP_REFERER', '')">
+
+        <p><strong>機關名稱：</strong><span tal:content="context/govDepartment"></span></p>
+        <p><strong>單位名稱：</strong><span tal:content="context/govBranch"></span></p>
+        <p><strong>機關地址：</strong><span tal:content="context/govAddress"></span></p>
+        <p><strong>聯絡人：</strong><span tal:content="context/contact"></span></p>
+        <p><strong>聯絡電話：</strong><span tal:content="context/telNo"></span></p>
+        <p><strong>傳真號碼：</strong><span tal:content="context/faxNo"></span></p>
+        <p><strong>電子郵件信箱：</strong>
+           <a tal:content="context/emailAddress"
+              tal:attributes="href string:mailto:${context/emailAddress}">
+           </a>
+        </p>
+
+        <p><strong>公告日期：</strong><span tal:content="python:str(context.startDate).split()[0]"></span></p>
+        <p><strong>標案案號：</strong><span tal:content="context/noticeId"></span></p>
+        <p><strong>標案名稱：</strong><span tal:content="context/noticeName"></span></p>
+        <p><strong>標案預算：</strong>
+             <span tal:content="string:${context/budget}" />
+             <span>(僅供參考，正確預算請見</span>
+             <a target="_blank" tal:attributes="href context/noticeUrl">官方公告</a>
+             <span>)</span>
+
+        </p>
+        <p><strong>招標方式：</strong><span tal:content="context/bidWay"></span></p>
+        <p><strong>決標方式：</strong><span tal:content="context/decideWay"></span></p>
+        <p><strong>公告次數：</strong><span tal:content="context/noticeTimes"></span></p>
+        <p><strong>招標狀態：</strong><span tal:content="context/noticeState"></span></p>
+
+        <p><strong>截標時間：</strong><span tal:content="context/endDate"></span></p>
+        <p><strong>開標時間：</strong><span tal:content="context/bidDate"></span></p>
+        <p><strong>開標地點：</strong><span tal:content="context/bidAddress"></span></p>
+        <p><strong>押標金：</strong><span tal:content="context/bidDeposit"></span></p>
+        <p><strong>投標地點：</strong><span tal:content="context/documentSendTo"></span></p>
+        <p><strong>廠商資格摘要：</strong><span tal:content="context/companyQualification"></span></p>
+        <p><strong>履約能力要求：</strong><span tal:content="context/companyAbility"></span></p>
+        <p><strong>公告網址：</strong>
+           <a tal:attributes="href context/noticeUrl" target=_blank>前往工程會公告網址</a>
+        </p>
+
+
+
+
+</div>
+
+
+
     </div>
+
+
+
 
 <!-- 興趣列表 -->
 
